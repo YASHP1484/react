@@ -1,0 +1,115 @@
+{
+  "users": [
+    {
+      "id": "5d56",
+      "hobby": [
+        "teaching"
+      ],
+      "sex": "male",
+      "username": "Yash",
+      "age": "13",
+      "countries": "Andorra",
+      "state": "Escaldes-Engordany",
+      "city": "les Escaldes"
+    },
+    {
+      "id": "0630",
+      "hobby": [
+        "singing"
+      ],
+      "sex": "male",
+      "username": "Yash",
+      "age": "13",
+      "countries": "Angola",
+      "state": "Bengo Province",
+      "city": "Caxito"
+    },
+    {
+      "id": "2eb2",
+      "hobby": [
+        "singing",
+        "teaching",
+        "dancing"
+      ],
+      "sex": "male",
+      "username": "Yash",
+      "countries": "India",
+      "state": "Gujarat",
+      "city": "Mahemdavad",
+      "age": "13"
+    },
+    {
+      "id": "f3a5",
+      "hobby": [
+        "singing",
+        "playing-cricket"
+      ],
+      "sex": "male",
+      "username": "yash",
+      "age": "Evangeline Lowe",
+      "countries": "Andorra",
+      "state": "Escaldes-Engordany",
+      "city": "les Escaldes"
+    },
+    {
+      "id": "af83",
+      "hobby": [
+        "singing"
+      ],
+      "sex": "male",
+      "username": "harsh",
+      "age": "13",
+      "countries": "Afghanistan",
+      "state": "Badghis",
+      "city": "Qala i Naw"
+    },
+    {
+      "id": "100d",
+      "hobby": [
+        "singing"
+      ],
+      "sex": "male",
+      "username": "priyanshu",
+      "age": "11",
+      "countries": "India",
+      "state": "Gujarat",
+      "city": "Amroli"
+    },
+    {
+      "id": "b30c",
+      "hobby": [
+        "singing"
+      ],
+      "sex": "male",
+      "username": "harsh",
+      "age": "2001-02-17",
+      "countries": "Albania",
+      "state": "Berat District",
+      "city": "Bashkia Berat"
+    },
+    {
+      "id": "859f",
+      "hobby": [
+        "playing-cricket"
+      ],
+      "sex": "male",
+      "username": "Yash",
+      "age": "1",
+      "countries": "Andorra",
+      "state": "Canillo",
+      "city": "Canillo"
+    },
+    {
+      "id": "686d",
+      "hobby": [
+        "singing"
+      ],
+      "sex": "female",
+      "countries": "Afghanistan",
+      "state": "Bamyan",
+      "city": "Bāmyān",
+      "username": "Yash",
+      "age": "13"
+    }
+  ]
+}

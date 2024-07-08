@@ -1,3 +1,6 @@
+:root {
+  --purple: #6f42c1;
+}
 .App {
   text-align: center;
 }
@@ -35,4 +38,46 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.form{
+  background-color: #FFCFD4;
+  padding: 20px;
+}
+header{
+  text-align: center;
+}
+
+.button{
+  background-color: #282c34;
+  background-color:var(--purple);
+  color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.select{
+  display: flex;
+}
+.input-signUp{
+  background-color: #EFE4F1 !important ;
+}
+.alert-class{
+  padding-top: 5px;
+  padding-left: 5px;
+  text-decoration: underline;
+}
+.age{
+  display: flex;
+  flex-direction: column;
+}
+.horizontel{
+display: flex;
+flex-direction: row;
 }

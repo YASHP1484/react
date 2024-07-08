@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.css";
+import Form from "./form-component/form";
+import Grandparent from "./component/grandparent";
+import Layout from "./component/layout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Voting from "./component/voting";
+import LogIn from "./form-component/logIn";
+import Counter from "./component/counter";
+import Component1 from "./useContext/component1";
+import Container from "./form-component/container";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="form" element={<Form />} />
+          <Route path="grandparent" element={<Grandparent />} />
+          <Route path="voting" element={<Voting />} />
+          <Route path="counter" element={<Counter />} />
+          <Route path="logIn" element={<LogIn />} />
+          <Route path="component1" element={<Component1 />} />
+          <Route path="container" element={<Container />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
