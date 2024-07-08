@@ -27,11 +27,9 @@ const Form = () => {
   const [getCity, setCity] = useState([]);
   const [message, setMessage] = useState("");
   const [alert, setAlert] = useState();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
   const hobby = [];
   const navigate = useNavigate();
-
+  let alertColor = { color: "red" };
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -111,7 +109,6 @@ const Form = () => {
     }
   }, [inputs.state]);
   console.log(getState, "html");
-  console.log(isSubmitted, "error");
 
   // function handleChangeDropdown(event) {
   //   const name = event.target.name;
@@ -120,7 +117,6 @@ const Form = () => {
   //   setInputs((values) => ({ ...values, [name]: value }));
   // }
   const handleSubmit = (event) => {
-    console.log(isSubmitted, "submit");
     event.preventDefault();
     if (editID) {
       axios.put(`http://localhost:8000/users/${editID}`, inputs).then((res) => {
@@ -191,18 +187,17 @@ const Form = () => {
           ) {
             event.preventDefault();
             setMessage("This field is required.");
-            setIsSubmitted(true);
           } else {
             handleSubmit(event);
           }
         }}
       >
         <div className="formGroup age">
-          <label htmlFor="" style={alert}>
+          <label htmlFor="" style={!inputs.username ? alertColor : null}>
             Enter your name:
           </label>
           <Box
-            component="form"
+            // component="form"
             sx={{
               "& > :not(style)": { m: 1, width: "25ch" },
             }}
@@ -210,7 +205,7 @@ const Form = () => {
             autoComplete="off"
           />
           <TextField
-            error={!inputs.username && isSubmitted}
+            error={inputs.username == ""}
             id="outlined-basic"
             label="username"
             variant="outlined"
@@ -227,7 +222,7 @@ const Form = () => {
           <FormControl>
             <FormLabel
               id="demo-row-radio-buttons-group-label"
-              error={!inputs.sex && isSubmitted}
+              error={!inputs.sex}
             >
               Gender
             </FormLabel>
@@ -265,7 +260,7 @@ const Form = () => {
             Enter your age
           </label>
           <TextField
-            error={!inputs.age && isSubmitted}
+            error={!inputs.age}
             id="outlined-basic"
             label="age"
             variant="outlined"
@@ -286,8 +281,8 @@ const Form = () => {
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">country</InputLabel>
               <Select
-                error={!inputs.countries && isSubmitted}
                 labelId="demo-simple-select-label"
+                error={!inputs.countries}
                 id="demo-simple-select"
                 name="countries"
                 value={inputs?.countries || ""}
@@ -301,11 +296,10 @@ const Form = () => {
                 ))}
               </Select>
             </FormControl>
-
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">state</InputLabel>
               <Select
-                error={!inputs.state && isSubmitted}
+                error={!inputs.state}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 name="state"
@@ -323,7 +317,7 @@ const Form = () => {
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">city</InputLabel>
               <Select
-                error={!inputs.city && isSubmitted}
+                error={!inputs.city}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 name="city"
@@ -351,19 +345,19 @@ const Form = () => {
           <div className="form-check">
             <FormGroup>
               <FormControlLabel
-                error={!inputs.hobby && isSubmitted}
+                error={"true"}
                 control={<Checkbox defaultChecked />}
                 label="singing"
                 value="singing"
-                checked={inputs?.hobby?.includes("singing")}
+                // checked={inputs?.hobby?.includes("singing")}
                 onChange={handleChange}
                 name="hobby"
               />
               <FormControlLabel
-                error={!inputs.hobby && isSubmitted}
+                // error={inputs.hobby.length == 0}
                 control={<Checkbox />}
                 label="playing-cricket"
-                checked={inputs?.hobby?.includes("playing-cricket")}
+                // checked={inputs?.hobby?.includes("playing-cricket")}
                 value="playing-cricket"
                 onChange={handleChange}
                 name="hobby"
@@ -371,7 +365,7 @@ const Form = () => {
               <FormControlLabel
                 control={<Checkbox />}
                 label="teaching"
-                checked={inputs?.hobby?.includes("teaching")}
+                // checked={inputs?.hobby?.includes("teaching")}
                 value="teaching"
                 onChange={handleChange}
                 name="hobby"
@@ -379,7 +373,7 @@ const Form = () => {
               <FormControlLabel
                 control={<Checkbox />}
                 label="teaching"
-                checked={inputs?.hobby?.includes("dancing")}
+                // checked={inputs?.hobby?.includes("dancing")}
                 value="dancing"
                 onChange={handleChange}
                 name="hobby"
