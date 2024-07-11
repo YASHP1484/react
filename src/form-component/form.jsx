@@ -27,9 +27,11 @@ const Form = () => {
   const [getCity, setCity] = useState([]);
   const [message, setMessage] = useState("");
   const [alert, setAlert] = useState();
+  const [alertMsg, setAlertMsg] = useState(false);
+
   const hobby = [];
   const navigate = useNavigate();
-  let alertColor = { color: "red" };
+  let alertColor = { color: "black" };
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -169,242 +171,258 @@ const Form = () => {
   //   }
   // }
   return (
-    <div className="container col-sm-3">
-      <header>
-        <h1>SignUp Form</h1>
-        <p className="">create your Account</p>
-      </header>
-      <form
-        action=""
-        className="form"
-        onSubmit={(event) => {
-          if (
-            !inputs?.username ||
-            !inputs?.hobby ||
-            !inputs?.sex ||
-            !inputs?.city ||
-            !inputs?.age
-          ) {
-            event.preventDefault();
-            setMessage("This field is required.");
-          } else {
-            handleSubmit(event);
-          }
-        }}
-      >
-        <div className="formGroup age">
-          <label htmlFor="" style={!inputs.username ? alertColor : null}>
-            Enter your name:
-          </label>
-          <Box
-            // component="form"
-            sx={{
-              "& > :not(style)": { m: 1, width: "25ch" },
-            }}
-            noValidate
-            autoComplete="off"
-          />
-          <TextField
-            error={inputs.username == ""}
-            id="outlined-basic"
-            label="username"
-            variant="outlined"
-            name="username"
-            type="text"
-            value={inputs.username}
-            placeholder="username"
-            onChange={handleChange}
-          />
-          {!inputs.username && <ValidationAlertMessage message={message} />}
-        </div>
-        <br />
-        <div className="formGroup age">
-          <FormControl>
-            <FormLabel
-              id="demo-row-radio-buttons-group-label"
-              error={!inputs.sex}
+    <>
+      <div className="container col-sm-3">
+        <header>
+          <h1>SignUp Form</h1>
+          <p className="">create your Account</p>
+        </header>
+        <form
+          action=""
+          className="form"
+          onSubmit={(event) => {
+            if (
+              !inputs?.username ||
+              !inputs?.hobby ||
+              !inputs?.sex ||
+              !inputs?.city ||
+              !inputs?.age
+            ) {
+              event.preventDefault();
+              setMessage("This field is required.");
+              setAlertMsg(true);
+            } else {
+              handleSubmit(event);
+            }
+          }}
+        >
+          <div className="formGroup age">
+            <Box
+              action=""
+              component="form"
+              sx={{
+                "& > :not(style)": { m: 1, width: "25ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            />
+            {console.log(alertMsg, inputs.username, inputs.age, "msg")}
+            <label
+              htmlFor=""
+              style={
+                !inputs.username && alertMsg
+                  ? (alertColor = { color: "red" })
+                  : (alertColor = { color: "black " })
+              }
             >
-              Gender
-            </FormLabel>
-            <RadioGroup
-              row
-              aria-labelledby="demo-row-radio-buttons-group-label"
-              defaultValue="Male"
-              name="row-radio-buttons-group"
-            >
-              <FormControlLabel
-                value="female"
-                control={<Radio />}
-                label="Female"
-                checked={inputs.sex == "female"}
-                name="sex"
-                onChange={handleChange}
-              />
-              <FormControlLabel
-                value="male"
-                control={<Radio />}
-                checked={inputs.sex == "male"}
-                label="Male"
-                name="sex"
-                onChange={handleChange}
-              />
-            </RadioGroup>
-          </FormControl>
-          <div>
-            {!inputs.sex && <ValidationAlertMessage message={message} />}
+              Enter your name:
+            </label>
+            <TextField
+              error={!inputs.username && alertMsg}
+              id="outlined-basic"
+              label="username"
+              variant="outlined"
+              name="username"
+              value={inputs.username}
+              placeholder="username"
+              type="text"
+              onChange={handleChange}
+            />
+            {!inputs.username && <ValidationAlertMessage message={message} />}
           </div>
-        </div>
-        <br />
-        <div className="formGroup age">
-          <label htmlFor="" style={alert}>
-            Enter your age
-          </label>
-          <TextField
-            error={!inputs.age}
-            id="outlined-basic"
-            label="age"
-            variant="outlined"
-            name="age"
-            type="text"
-            value={inputs.age}
-            placeholder="age"
-            onChange={handleChange}
-          />
-          {!inputs.age && <ValidationAlertMessage message={message} />}
-        </div>
-        <br />
-        <div className="formGroup">
-          <label htmlFor="" style={alert}>
-            Enter your city:
-          </label>
-          <div className="select">
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">country</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                error={!inputs.countries}
-                id="demo-simple-select"
-                name="countries"
-                value={inputs?.countries || ""}
-                label="country"
-                onChange={handleChange}
+          <br />
+          <div className="formGroup age">
+            <FormControl>
+              <FormLabel
+                id="demo-row-radio-buttons-group-label"
+                error={inputs.sex == ""}
               >
-                {getCountry.map((item, index) => (
-                  <MenuItem value={item.name} key={index}>
-                    {item.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">state</InputLabel>
-              <Select
-                error={!inputs.state}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                name="state"
-                value={inputs?.state || ""}
-                label="state"
-                onChange={handleChange}
+                Gender
+              </FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                defaultValue="Male"
+                name="row-radio-buttons-group"
               >
-                {getState.map((item, index) => (
-                  <MenuItem value={item.name} key={index}>
-                    {item.name}
-                  </MenuItem>
-                ))}
-              </Select>
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                  checked={inputs.sex == "female"}
+                  name="sex"
+                  onChange={handleChange}
+                />
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  checked={inputs.sex == "male"}
+                  label="Male"
+                  name="sex"
+                  onChange={handleChange}
+                />
+              </RadioGroup>
             </FormControl>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">city</InputLabel>
-              <Select
-                error={!inputs.city}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                name="city"
-                value={inputs?.city || ""}
-                label="city"
-                onChange={handleChange}
+            <div>
+              {!inputs.sex && <ValidationAlertMessage message={message} />}
+            </div>
+          </div>
+          <br />
+          <div className="formGroup age">
+            <label htmlFor="" style={alert}>
+              Enter your age
+            </label>
+            <TextField
+              error={!inputs.age && alertMsg}
+              id="outlined-basic"
+              label="age"
+              variant="outlined"
+              name="age"
+              type="text"
+              value={inputs.age}
+              placeholder="age"
+              onChange={handleChange}
+            />
+            {!inputs.age && <ValidationAlertMessage message={message} />}
+          </div>
+          <br />
+          <div className="formGroup">
+            <label htmlFor="" style={alert}>
+              Enter your city:
+            </label>
+            <div className="select">
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">country</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  error={!inputs.countries && alertMsg}
+                  id="demo-simple-select"
+                  name="countries"
+                  value={inputs?.countries || ""}
+                  label="country"
+                  onChange={handleChange}
+                >
+                  {getCountry.map((item, index) => (
+                    <MenuItem value={item.name} key={index}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">state</InputLabel>
+                <Select
+                  error={!inputs.state && alertMsg}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  name="state"
+                  value={inputs?.state || ""}
+                  label="state"
+                  onChange={handleChange}
+                >
+                  {getState.map((item, index) => (
+                    <MenuItem value={item.name} key={index}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">city</InputLabel>
+                <Select
+                  error={!inputs.city && alertMsg}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  name="city"
+                  value={inputs?.city || ""}
+                  label="city"
+                  onChange={handleChange}
+                >
+                  {getCity.map((item, index) => (
+                    <MenuItem value={item} key={index}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <div>
+              {!inputs.city && <ValidationAlertMessage message={message} />}
+            </div>
+          </div>
+          <br />
+          <div className="formGroup">
+            <label className="form-check-label" htmlFor="" style={alert}>
+              enter your Hobby:
+            </label>
+            <div className="form-check">
+              <FormGroup>
+                <FormControlLabel
+                  error={inputs.hobby.length == 0 && alertMsg}
+                  control={
+                    <Checkbox checked={inputs?.hobby?.includes("singing")} />
+                  }
+                  label="singing"
+                  value="singing"
+                  onChange={handleChange}
+                  name="hobby"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={inputs?.hobby?.includes("playing-cricket")}
+                    />
+                  }
+                  label="playing-cricket"
+                  value="playing-cricket"
+                  onChange={handleChange}
+                  name="hobby"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={inputs?.hobby?.includes("teaching")} />
+                  }
+                  label="teaching"
+                  value="teaching"
+                  onChange={handleChange}
+                  name="hobby"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={inputs?.hobby?.includes("dancing")} />
+                  }
+                  label="teaching"
+                  value="dancing"
+                  onChange={handleChange}
+                  name="hobby"
+                />
+              </FormGroup>
+            </div>
+            {inputs.hobby.length == 0 && (
+              <ValidationAlertMessage message={message} />
+            )}
+          </div>
+          <br />
+          {editID ? (
+            <Stack direction="row">
+              <Button
+                variant="contained"
+                value={"update"}
+                name="submit"
+                type="submit"
               >
-                {getCity.map((item, index) => (
-                  <MenuItem value={item} key={index}>
-                    {item}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-          <div>
-            {!inputs.city && <ValidationAlertMessage message={message} />}
-          </div>
-        </div>
-        <br />
-        <div className="formGroup">
-          <label className="form-check-label" htmlFor="" style={alert}>
-            enter your Hobby:
-          </label>
-          <div className="form-check">
-            <FormGroup>
-              <FormControlLabel
-                error={"true"}
-                control={<Checkbox defaultChecked />}
-                label="singing"
-                value="singing"
-                // checked={inputs?.hobby?.includes("singing")}
-                onChange={handleChange}
-                name="hobby"
-              />
-              <FormControlLabel
-                // error={inputs.hobby.length == 0}
-                control={<Checkbox />}
-                label="playing-cricket"
-                // checked={inputs?.hobby?.includes("playing-cricket")}
-                value="playing-cricket"
-                onChange={handleChange}
-                name="hobby"
-              />
-              <FormControlLabel
-                control={<Checkbox />}
-                label="teaching"
-                // checked={inputs?.hobby?.includes("teaching")}
-                value="teaching"
-                onChange={handleChange}
-                name="hobby"
-              />
-              <FormControlLabel
-                control={<Checkbox />}
-                label="teaching"
-                // checked={inputs?.hobby?.includes("dancing")}
-                value="dancing"
-                onChange={handleChange}
-                name="hobby"
-              />
-            </FormGroup>
-          </div>
-          {inputs.hobby.length == 0 && (
-            <ValidationAlertMessage message={message} />
+                submit
+              </Button>
+            </Stack>
+          ) : (
+            <Stack direction="row">
+              <Button variant="contained" name="submit" type="submit">
+                submit
+              </Button>
+            </Stack>
           )}
-        </div>
-        <br />
-        {editID ? (
-          <Stack direction="row">
-            <Button
-              variant="contained"
-              value={"update"}
-              name="submit"
-              type="submit"
-            >
-              submit
-            </Button>
-          </Stack>
-        ) : (
-          <Stack direction="row">
-            <Button variant="contained" name="submit" type="submit">
-              submit
-            </Button>
-          </Stack>
-        )}
-      </form>
-
+        </form>
+      </div>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -433,7 +451,7 @@ const Form = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 
