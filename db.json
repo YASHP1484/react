@@ -1,115 +1,112 @@
 {
   "users": [
     {
-      "id": "5d56",
-      "hobby": [
-        "teaching"
-      ],
-      "sex": "male",
-      "username": "Yash",
-      "age": "13",
-      "countries": "Andorra",
-      "state": "Escaldes-Engordany",
-      "city": "les Escaldes"
-    },
-    {
-      "id": "0630",
-      "hobby": [
-        "singing"
-      ],
-      "sex": "male",
-      "username": "Yash",
-      "age": "13",
-      "countries": "Angola",
-      "state": "Bengo Province",
-      "city": "Caxito"
-    },
-    {
-      "id": "2eb2",
-      "hobby": [
-        "singing",
-        "teaching",
-        "dancing"
-      ],
-      "sex": "male",
-      "username": "Yash",
-      "countries": "India",
-      "state": "Gujarat",
-      "city": "Mahemdavad",
-      "age": "13"
-    },
-    {
-      "id": "f3a5",
+      "id": "d541",
       "hobby": [
         "singing",
         "playing-cricket"
       ],
       "sex": "male",
       "username": "yash",
-      "age": "Evangeline Lowe",
-      "countries": "Andorra",
-      "state": "Escaldes-Engordany",
-      "city": "les Escaldes"
-    },
-    {
-      "id": "af83",
-      "hobby": [
-        "singing"
-      ],
-      "sex": "male",
-      "username": "harsh",
       "age": "13",
-      "countries": "Afghanistan",
-      "state": "Badghis",
-      "city": "Qala i Naw"
-    },
-    {
-      "id": "100d",
-      "hobby": [
-        "singing"
-      ],
-      "sex": "male",
-      "username": "priyanshu",
-      "age": "11",
+      "Email": "yashp1484@gmail.com",
       "countries": "India",
-      "state": "Gujarat",
-      "city": "Amroli"
+      "state": "Chandigarh",
+      "city": "Chandigarh"
     },
     {
-      "id": "b30c",
+      "id": "ea61",
+      "hobby": [
+        "singing",
+        "playing-cricket",
+        "reading",
+        "dancing"
+      ],
+      "sex": "female",
+      "username": "gykesygi",
+      "age": "Voluptas consequat ",
+      "Email": "xulacyd@mailinator.com",
+      "countries": "Angola",
+      "state": "Bié Province",
+      "city": "Chissamba"
+    },
+    {
+      "id": "3584",
       "hobby": [
         "singing"
       ],
       "sex": "male",
-      "username": "harsh",
-      "age": "2001-02-17",
-      "countries": "Albania",
-      "state": "Berat District",
-      "city": "Bashkia Berat"
+      "username": "yash",
+      "age": "13",
+      "Email": "yashp1484@gmail.com",
+      "countries": "India",
+      "state": "Andhra Pradesh",
+      "city": "Addanki"
     },
     {
-      "id": "859f",
+      "id": "c397",
       "hobby": [
         "playing-cricket"
       ],
       "sex": "male",
       "username": "Yash",
-      "age": "1",
-      "countries": "Andorra",
-      "state": "Canillo",
-      "city": "Canillo"
+      "age": "13",
+      "Email": "yashp1484@gmail.com",
+      "countries": "Iraq",
+      "state": "Karbala Governorate",
+      "city": "Al Hindīyah"
     },
     {
-      "id": "686d",
+      "id": "7f4f",
+      "hobby": [
+        "reading"
+      ],
+      "sex": "male",
+      "username": "patel yash shaileshbhai",
+      "age": "13",
+      "Email": "yashp1484@gmail.com",
+      "countries": "India",
+      "state": "Gujarat",
+      "city": "Chaklasi"
+    },
+    {
+      "id": "0e56",
+      "hobby": [
+        "singing"
+      ],
+      "sex": "male",
+      "username": "yash",
+      "age": "13",
+      "Email": "yashp1484@gmail.com",
+      "countries": "Iceland",
+      "state": "Eastern Region",
+      "city": "Fjarðabyggð"
+    },
+    {
+      "id": "e70c",
       "hobby": [
         "singing"
       ],
       "sex": "female",
-      "countries": "Afghanistan",
-      "state": "Bamyan",
-      "city": "Bāmyān",
-      "username": "Yash",
-      "age": "13"
+      "username": "Nrupal",
+      "age": "12",
+      "Email": "yashp1484@gmail.com",
+      "countries": "Iceland",
+      "state": "Northeastern Region",
+      "city": "Dalvíkurbyggð"
+    },
+    {
+      "id": "ad24",
+      "hobby": [
+        "singing"
+      ],
+      "sex": "male",
+      "username": "bjj",
+      "age": "bb",
+      "Email": "uu",
+      "countries": "Armenia",
+      "state": "Lori Region",
+      "city": "Darpas"
     }
   ]
 }

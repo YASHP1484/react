@@ -1,8 +1,10 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+import { useSelector } from "react-redux";
 
 const Layout = () => {
+  const { userListing } = useSelector((state) => state.userReducer);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

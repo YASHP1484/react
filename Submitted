@@ -1,0 +1,174 @@
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 41b9df3..1ab5708 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -20,10 +20,10 @@[m
+     "web-vitals": "^2.1.4"[m
+   },[m
+   "scripts": {[m
+[31m-    "start": "react-scripts start",[m
+[31m-    "build": "react-scripts build",[m
+     "test": "react-scripts test",[m
+[31m-    "eject": "react-scripts eject"[m
+[32m+[m[32m    "eject": "react-scripts eject",[m
+[32m+[m[32m    "start": " SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",[m
+[32m+[m[32m    "build": " SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build"[m
+   },[m
+   "eslintConfig": {[m
+     "extends": [[m
+[1mdiff --git a/src/form-component/form.jsx b/src/form-component/form.jsx[m
+[1mindex 6a2e221..e2ca98b 100644[m
+[1m--- a/src/form-component/form.jsx[m
+[1m+++ b/src/form-component/form.jsx[m
+[36m@@ -27,11 +27,9 @@[m [mconst Form = () => {[m
+   const [getCity, setCity] = useState([]);[m
+   const [message, setMessage] = useState("");[m
+   const [alert, setAlert] = useState();[m
+[31m-  const [isSubmitted, setIsSubmitted] = useState(false);[m
+[31m-[m
+   const hobby = [];[m
+   const navigate = useNavigate();[m
+[31m-[m
+[32m+[m[32m  let alertColor = { color: "red" };[m
+   const handleChange = (event) => {[m
+     const name = event.target.name;[m
+     const value = event.target.value;[m
+[36m@@ -111,7 +109,6 @@[m [mconst Form = () => {[m
+     }[m
+   }, [inputs.state]);[m
+   console.log(getState, "html");[m
+[31m-  console.log(isSubmitted, "error");[m
+ [m
+   // function handleChangeDropdown(event) {[m
+   //   const name = event.target.name;[m
+[36m@@ -120,7 +117,6 @@[m [mconst Form = () => {[m
+   //   setInputs((values) => ({ ...values, [name]: value }));[m
+   // }[m
+   const handleSubmit = (event) => {[m
+[31m-    console.log(isSubmitted, "submit");[m
+     event.preventDefault();[m
+     if (editID) {[m
+       axios.put(`http://localhost:8000/users/${editID}`, inputs).then((res) => {[m
+[36m@@ -191,18 +187,17 @@[m [mconst Form = () => {[m
+           ) {[m
+             event.preventDefault();[m
+             setMessage("This field is required.");[m
+[31m-            setIsSubmitted(true);[m
+           } else {[m
+             handleSubmit(event);[m
+           }[m
+         }}[m
+       >[m
+         <div className="formGroup age">[m
+[31m-          <label htmlFor="" style={alert}>[m
+[32m+[m[32m          <label htmlFor="" style={!inputs.username ? alertColor : null}>[m
+             Enter your name:[m
+           </label>[m
+           <Box[m
+[31m-            component="form"[m
+[32m+[m[32m            // component="form"[m
+             sx={{[m
+               "& > :not(style)": { m: 1, width: "25ch" },[m
+             }}[m
+[36m@@ -210,7 +205,7 @@[m [mconst Form = () => {[m
+             autoComplete="off"[m
+           />[m
+           <TextField[m
+[31m-            error={!inputs.username && isSubmitted}[m
+[32m+[m[32m            error={inputs.username == ""}[m
+             id="outlined-basic"[m
+             label="username"[m
+             variant="outlined"[m
+[36m@@ -227,7 +222,7 @@[m [mconst Form = () => {[m
+           <FormControl>[m
+             <FormLabel[m
+               id="demo-row-radio-buttons-group-label"[m
+[31m-              error={!inputs.sex && isSubmitted}[m
+[32m+[m[32m              error={!inputs.sex}[m
+             >[m
+               Gender[m
+             </FormLabel>[m
+[36m@@ -265,7 +260,7 @@[m [mconst Form = () => {[m
+             Enter your age[m
+           </label>[m
+           <TextField[m
+[31m-            error={!inputs.age && isSubmitted}[m
+[32m+[m[32m            error={!inputs.age}[m
+             id="outlined-basic"[m
+             label="age"[m
+             variant="outlined"[m
+[36m@@ -286,8 +281,8 @@[m [mconst Form = () => {[m
+             <FormControl fullWidth>[m
+               <InputLabel id="demo-simple-select-label">country</InputLabel>[m
+               <Select[m
+[31m-                error={!inputs.countries && isSubmitted}[m
+                 labelId="demo-simple-select-label"[m
+[32m+[m[32m                error={!inputs.countries}[m
+                 id="demo-simple-select"[m
+                 name="countries"[m
+                 value={inputs?.countries || ""}[m
+[36m@@ -301,11 +296,10 @@[m [mconst Form = () => {[m
+                 ))}[m
+               </Select>[m
+             </FormControl>[m
+[31m-[m
+             <FormControl fullWidth>[m
+               <InputLabel id="demo-simple-select-label">state</InputLabel>[m
+               <Select[m
+[31m-                error={!inputs.state && isSubmitted}[m
+[32m+[m[32m                error={!inputs.state}[m
+                 labelId="demo-simple-select-label"[m
+                 id="demo-simple-select"[m
+                 name="state"[m
+[36m@@ -323,7 +317,7 @@[m [mconst Form = () => {[m
+             <FormControl fullWidth>[m
+               <InputLabel id="demo-simple-select-label">city</InputLabel>[m
+               <Select[m
+[31m-                error={!inputs.city && isSubmitted}[m
+[32m+[m[32m                error={!inputs.city}[m
+                 labelId="demo-simple-select-label"[m
+                 id="demo-simple-select"[m
+                 name="city"[m
+[36m@@ -351,19 +345,19 @@[m [mconst Form = () => {[m
+           <div className="form-check">[m
+             <FormGroup>[m
+               <FormControlLabel[m
+[31m-                error={!inputs.hobby && isSubmitted}[m
+[32m+[m[32m                error={"true"}[m
+                 control={<Checkbox defaultChecked />}[m
+                 label="singing"[m
+                 value="singing"[m
+[31m-                checked={inputs?.hobby?.includes("singing")}[m
+[32m+[m[32m                // checked={inputs?.hobby?.includes("singing")}[m
+                 onChange={handleChange}[m
+                 name="hobby"[m
+               />[m
+               <FormControlLabel[m
+[31m-                error={!inputs.hobby && isSubmitted}[m
+[32m+[m[32m                // error={inputs.hobby.length == 0}[m
+                 control={<Checkbox />}[m
+                 label="playing-cricket"[m
+[31m-                checked={inputs?.hobby?.includes("playing-cricket")}[m
+[32m+[m[32m                // checked={inputs?.hobby?.includes("playing-cricket")}[m
+                 value="playing-cricket"[m
+                 onChange={handleChange}[m
+                 name="hobby"[m
+[36m@@ -371,7 +365,7 @@[m [mconst Form = () => {[m
+               <FormControlLabel[m
+                 control={<Checkbox />}[m
+                 label="teaching"[m
+[31m-                checked={inputs?.hobby?.includes("teaching")}[m
+[32m+[m[32m                // checked={inputs?.hobby?.includes("teaching")}[m
+                 value="teaching"[m
+                 onChange={handleChange}[m
+                 name="hobby"[m
+[36m@@ -379,7 +373,7 @@[m [mconst Form = () => {[m
+               <FormControlLabel[m
+                 control={<Checkbox />}[m
+                 label="teaching"[m
+[31m-                checked={inputs?.hobby?.includes("dancing")}[m
+[32m+[m[32m                // checked={inputs?.hobby?.includes("dancing")}[m
+                 value="dancing"[m
+                 onChange={handleChange}[m
+                 name="hobby"[m

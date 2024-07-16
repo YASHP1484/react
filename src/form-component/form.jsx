@@ -17,10 +17,13 @@ import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserList } from "../store/Thunk/userThunk";
+// import { FormHelperText } from "@mui/material";
 
 const Form = () => {
   const [inputs, setInputs] = useState({ hobby: [], sex: "male" });
-  const [tableData, setTableData] = useState([]);
+  // const [tableData, setTableData] = useState([]);
   const [editID, setEditId] = useState("");
   const [getCountry, setCountry] = useState([]);
   const [getState, setState] = useState([]);
@@ -28,6 +31,11 @@ const Form = () => {
   const [message, setMessage] = useState("");
   const [alert, setAlert] = useState();
   const [alertMsg, setAlertMsg] = useState(false);
+  const newHobbies = ["singing", "playing-cricket", "reading", "dancing"];
+  const dispatch = useDispatch();
+
+  const { userListing } = useSelector((state) => state.userReducer);
+  console.log("userListing ", userListing);
 
   const hobby = [];
   const navigate = useNavigate();
@@ -53,9 +61,11 @@ const Form = () => {
     }
   };
   function getUserData() {
-    axios.get("http://localhost:8000/users").then((res) => {
-      setTableData(res.data);
-    });
+    console.log("getUserData ");
+    dispatch(getUserList({}));
+    // axios.get("http://localhost:8000/users").then((res) => {
+    //   setTableData(res.data);
+    // });
   }
   function getData() {
     axios
@@ -112,12 +122,6 @@ const Form = () => {
   }, [inputs.state]);
   console.log(getState, "html");
 
-  // function handleChangeDropdown(event) {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-
-  //   setInputs((values) => ({ ...values, [name]: value }));
-  // }
   const handleSubmit = (event) => {
     event.preventDefault();
     if (editID) {
@@ -165,6 +169,7 @@ const Form = () => {
     getUserData();
     getData();
   }, []);
+
   // function validation() {
   //   if (!inputs?.username) {
   //     alert("fill the name");
@@ -177,10 +182,12 @@ const Form = () => {
           <h1>SignUp Form</h1>
           <p className="">create your Account</p>
         </header>
-        <form
+        {/* <form action="" className="form"> */}
+        <Box
           action=""
-          className="form"
+          component="form"
           onSubmit={(event) => {
+            console.log("cc");
             if (
               !inputs?.username ||
               !inputs?.hobby ||
@@ -195,40 +202,42 @@ const Form = () => {
               handleSubmit(event);
             }
           }}
+          sx={{
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
         >
           <div className="formGroup age">
-            <Box
-              action=""
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "25ch" },
-              }}
-              noValidate
-              autoComplete="off"
-            />
-            {console.log(alertMsg, inputs.username, inputs.age, "msg")}
-            <label
-              htmlFor=""
-              style={
-                !inputs.username && alertMsg
-                  ? (alertColor = { color: "red" })
-                  : (alertColor = { color: "black " })
-              }
+            {console.log(alertMsg, !inputs.username, inputs.age, "msg")}
+
+            <FormLabel
+              error={!inputs.username}
+              id="demo-row-radio-buttons-group-label"
+              // style={
+              //   inputs.username == "" || alertMsg
+              //     ? (alertColor = { color: "red" })
+              //     : (alertColor = { color: " " })
+              // }
             >
-              Enter your name:
-            </label>
+              Enter Your Name
+            </FormLabel>
+
             <TextField
-              error={!inputs.username && alertMsg}
+              error={!inputs.username}
               id="outlined-basic"
-              label="username"
+              // label="username"
               variant="outlined"
               name="username"
               value={inputs.username}
               placeholder="username"
               type="text"
+              helperText={!inputs.username ? "sdsadnj" : ""}
               onChange={handleChange}
             />
-            {!inputs.username && <ValidationAlertMessage message={message} />}
+
+            {/* <FormHelperText>asdadsadsds</FormHelperText> */}
+            {/* {!inputs.username && <ValidationAlertMessage message={message} />} */}
           </div>
           <br />
           <div className="formGroup age">
@@ -269,13 +278,13 @@ const Form = () => {
           </div>
           <br />
           <div className="formGroup age">
-            <label htmlFor="" style={alert}>
-              Enter your age
-            </label>
+            <FormLabel id="demo-row-radio-buttons-group-label">
+              Enter Your Age
+            </FormLabel>
             <TextField
-              error={!inputs.age && alertMsg}
+              error={inputs.age == "" && alertMsg}
               id="outlined-basic"
-              label="age"
+              // label="age"
               variant="outlined"
               name="age"
               type="text"
@@ -285,20 +294,37 @@ const Form = () => {
             />
             {!inputs.age && <ValidationAlertMessage message={message} />}
           </div>
+          <div className="formGroup age">
+            <FormLabel id="demo-row-radio-buttons-group-label">
+              Enter Your Email
+            </FormLabel>
+            <TextField
+              error={inputs.Email == "" && alertMsg}
+              id="outlined-basic"
+              // label="Email"
+              variant="outlined"
+              name="Email"
+              type="text"
+              value={inputs.Email}
+              placeholder="Email"
+              onChange={handleChange}
+            />
+            {!inputs.Email && <ValidationAlertMessage message={message} />}
+          </div>
           <br />
           <div className="formGroup">
-            <label htmlFor="" style={alert}>
-              Enter your city:
-            </label>
+            <FormLabel id="demo-row-radio-buttons-group-label">
+              Enter Your city
+            </FormLabel>
             <div className="select">
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">country</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
-                  error={!inputs.countries && alertMsg}
+                  error={inputs.countries == "" && alertMsg}
                   id="demo-simple-select"
                   name="countries"
-                  value={inputs?.countries || ""}
+                  value={inputs?.countries}
                   label="country"
                   onChange={handleChange}
                 >
@@ -312,11 +338,11 @@ const Form = () => {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">state</InputLabel>
                 <Select
-                  error={!inputs.state && alertMsg}
+                  error={inputs.state == "" && alertMsg}
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   name="state"
-                  value={inputs?.state || ""}
+                  value={inputs?.state}
                   label="state"
                   onChange={handleChange}
                 >
@@ -330,11 +356,11 @@ const Form = () => {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">city</InputLabel>
                 <Select
-                  error={!inputs.city && alertMsg}
+                  error={inputs.city == "" && alertMsg}
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   name="city"
-                  value={inputs?.city || ""}
+                  value={inputs?.city}
                   label="city"
                   onChange={handleChange}
                 >
@@ -352,52 +378,25 @@ const Form = () => {
           </div>
           <br />
           <div className="formGroup">
-            <label className="form-check-label" htmlFor="" style={alert}>
-              enter your Hobby:
-            </label>
+            <FormLabel id="demo-row-radio-buttons-group-label">
+              Enter Your Hobby
+            </FormLabel>
             <div className="form-check">
               <FormGroup>
-                <FormControlLabel
-                  error={inputs.hobby.length == 0 && alertMsg}
-                  control={
-                    <Checkbox checked={inputs?.hobby?.includes("singing")} />
-                  }
-                  label="singing"
-                  value="singing"
-                  onChange={handleChange}
-                  name="hobby"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={inputs?.hobby?.includes("playing-cricket")}
+                {newHobbies.map((x) => {
+                  return (
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label={x}
+                      value={x}
+                      onChange={handleChange}
+                      name="hobby"
                     />
-                  }
-                  label="playing-cricket"
-                  value="playing-cricket"
-                  onChange={handleChange}
-                  name="hobby"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox checked={inputs?.hobby?.includes("teaching")} />
-                  }
-                  label="teaching"
-                  value="teaching"
-                  onChange={handleChange}
-                  name="hobby"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox checked={inputs?.hobby?.includes("dancing")} />
-                  }
-                  label="teaching"
-                  value="dancing"
-                  onChange={handleChange}
-                  name="hobby"
-                />
+                  );
+                })}
               </FormGroup>
             </div>
+
             {inputs.hobby.length == 0 && (
               <ValidationAlertMessage message={message} />
             )}
@@ -421,7 +420,8 @@ const Form = () => {
               </Button>
             </Stack>
           )}
-        </form>
+        </Box>
+        {/* </form> */}
       </div>
       <table className="table table-striped">
         <thead>
@@ -429,16 +429,18 @@ const Form = () => {
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">age</th>
+            <th scope="col">email</th>
             <th scope="col">city</th>
             <th scope="col">Hobby</th>
           </tr>
         </thead>
         <tbody>
-          {tableData.map((item, index) => (
+          {userListing?.map((item, index) => (
             <tr key={index}>
               <td>{item.id}</td>
               <td>{item.username}</td>
               <td>{item.age}</td>
+              <td>{item.Email}</td>
               <td>{item.city}</td>
               <td>{item.hobby.join(",")}</td>
               <td>
